@@ -1,18 +1,22 @@
-## Getting Started
+## Transcrição dos algoritmos de grafos temporais para a linguagem de programação java
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+`Primeiro dia:` Dia 29 de Março de 2026 iniciei e finalizei a escrita do algoritmo 1 do artigo Path Problems in Temporal Graphs: 
 
-## Folder Structure
+> Por questão de organização e para facilitar possiveis manutenções o projeto foi divido em classes e cada classe repolsa em seu devido arquivo.
 
-The workspace contains two folders by default, where:
+- classe `Edge` cria um objeto do tipo <e = (u, v, t, lambda)> e permite sua manipulação a partir dos metodos Getters e Setters
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+- classe `Algoritmo1` é a responsavel por realizar o algoritmo
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+- classe `Main` executa o codigo
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+<Futuras alterações> 
+ 
+    - Pedir para o usuário informar os verteces e os tempos
+    - Solicitar o veretece de partida/destino ao usuário
+    - Criar um metodo para que ao alcançar o vertece destino, com o caminho mais rapido, finalize a execução do algoritimo e imprima o todo o caminho, seu percurso, o tempo gasto entre cada vertece e tempo total do percurso.
+    
+<end>
 
-## Dependency Management
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+
