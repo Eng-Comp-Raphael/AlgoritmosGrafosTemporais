@@ -1,18 +1,20 @@
 package Algoritmos;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
 	public static void main(String[] args) {
 		// Configuração do Cenário
-		String[] vertices = { "A", "B", "C", "D" }; // Numero de Verteces
+		LinkedList<String> nos = new LinkedList<>(List.of("A", "B", "C", "D" )); // implementa os termos diretamente
 		String origem = "A";   //Vertece de partida
 		int tAlpha = 10; // tempo inicial
 		int tOmega = 50; // tempo final
 
 		// Criando o fluxo de arestas (Edge Stream)
-		List<Edge> stream = new ArrayList<>();
+		LinkedList<Edge> stream = new LinkedList<>();
+
 		stream.add(new Edge("A", "B", 15, 5)); // Chega em B às 20
 		stream.add(new Edge("A", "C", 20, 10)); // Chega em C às 30
 		stream.add(new Edge("B", "C", 22, 3)); // Chega em C às 25 (Melhor que o anterior!)
@@ -20,7 +22,12 @@ public class Main {
 		stream.add(new Edge("A", "D", 55, 10)); // Fora do intervalo (Gera break)
 
 		// Instanciando e rodando o algoritmo
-		Algoritmo1 algoritmo = new Algoritmo1();
-		algoritmo.executar(vertices, origem, tAlpha, tOmega, stream);
+		/*Algoritmo1 algoritmo = new Algoritmo1();
+		algoritmo.executar(nos, origem, tAlpha, tOmega, stream);
+		System.out.println();*/
+		
+		Menu menuMain = new Menu();
+
+		menuMain.MenuGlobal();
 	}
 }
