@@ -1,19 +1,19 @@
 package Algoritmos;
 //Algoritmo 1
-
+import java.util.List;
+import java.util.ArrayList;
 import java.util.HashMap;
-
 import java.util.Map;
-import java.util.LinkedList;
+
 
 public class Algoritmo1 {
 
 	private final int INFINITO = Integer.MAX_VALUE;
 	private Map<String, Integer> temposChegada = new HashMap<>();
-	private LinkedList<Edge> edgeStream = new LinkedList<>();
+	private List<Edge> edgeStream = new ArrayList<>();
 
 	// Executa o Algoritmo 1 conforme o pseudocódigo
-	public void executar(LinkedList<String> nos, String origem, int tAlpha, int tOmega, LinkedList<Edge> stream) {
+	public void executar(List<String> nos, String origem, int tAlpha, int tOmega, List<Edge> stream) {
 		this.edgeStream = stream;
 
 		// Linha 1: Inicialização t[x] = tAlpha e t[v] = infinito

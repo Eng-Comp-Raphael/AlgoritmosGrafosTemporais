@@ -1,5 +1,6 @@
 package Algoritmos;
-import java.util.LinkedList;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collection;
 import java.util.Comparator;
@@ -11,11 +12,11 @@ public class Menu {
     public int opcao;
     
     //Criação dos contrutores para o algoritmo 1
-    public LinkedList<String> nos = new LinkedList<>();
+    public List<String> nos = new ArrayList<>();
     public String noOrigem;
     public int t_alpha;
     public int t_omega;
-    public LinkedList<Edge> edges = new LinkedList<>();
+    public List<Edge> edges = new ArrayList<>();
     //objetos recorrentes
     public Scanner leitor = new Scanner(System.in);
 
