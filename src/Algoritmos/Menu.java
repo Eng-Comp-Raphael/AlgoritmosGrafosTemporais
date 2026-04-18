@@ -1,32 +1,28 @@
 package Algoritmos;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
-//import java.util.Collection;
-import java.util.Comparator;
 
 public class Menu {
-    //fluxo do menu
-    private int numberCelect;
+    // fluxo do menu
     private int celectOptions;
     private int opcao;
-    
-    //Criação dos contrutores para o algoritmo 1
+
+    // Criação dos contrutores para o algoritmo 1
     private List<String> nos = new ArrayList<>();
     private List<Edge> edges = new ArrayList<>();
-    
+
     private String noOrigem;
     private int t_alpha;
     private int t_omega;
-    
-    private Main_menu_algoritmo_1 menu_algoritmo_1 = new Main_menu_algoritmo_1();
-    //objetos recorrentes
+
+    private Options algoritmo = new Options();
+    // objetos recorrentes
     Scanner leitor = new Scanner(System.in);
 
-// ==========================================
-
     // ==========================================
-    // GETTERS E SETTERS - ALGORITMO 1
+    //      GETTERS E SETTERS - ALGORITMO 1
     // ==========================================
 
     public List<String> getNos() {
@@ -68,29 +64,13 @@ public class Menu {
     public void setT_omega(int t_omega) {
         this.t_omega = t_omega;
     }
-    
 
-    
-    /*public Menu(){
-        this.numberCelect = 0;
-        this.celectOptions = 0;
-    }*/
+    // =================================
+    //             METODOS
+    // =================================
 
-    public int menu_principal(){
-        //Scanner opScanner = new Scanner(System.in);
-        System.out.println("\n==== Menu principal ====\n");
-        System.out.println("[1] - Algoritmo 1");
-        System.out.println("[2] - Algoritmo 2");
-        System.out.println("[3] - Algoritmo 3");
-        System.out.println("[0] - Finalizar Programa");
-        System.out.print("\nOpção: ");
-        opcao = leitor.nextInt();
-        leitor.nextLine(); // limpar sobra do enter
-        return opcao;
-    }
-
-    public int menu_Algoritmo_1(){
-        //Scanner opScanner = new Scanner(System.in);
+    public int menu_app() {
+        // Scanner opScanner = new Scanner(System.in);
         System.out.println("\n==== Menu Algoritmo ====\n");
         System.out.println("[1] - adicionar nós");
         System.out.println("[2] - Informar vertece de origem");
@@ -100,45 +80,52 @@ public class Menu {
         System.out.println("[6] - Imprimir detalhes ");
         System.out.println("[7] - Executar algoritmo 1");
 
-        System.out.println("[0] - Voltar ao menu principal");
+        System.out.println("[-1] - Finalizar programa");
         System.out.print("\nOpção: ");
         opcao = leitor.nextInt();
         leitor.nextLine();
         return opcao;
     }
 
-//MENU GLOBAL ===================================================================================================================
-    public void MenuGlobal(){
+    public void MenuGlobal() {
 
-        do{
-            numberCelect = menu_principal();
-             // recolhe a informação dado pelo usuario no menu principal 
-            switch (numberCelect) {
+        do {
+            celectOptions = menu_app();
+
+            switch (celectOptions) {
                 case 1:
-                    do{
-                        celectOptions = menu_Algoritmo_1();
-                        if(celectOptions == 0){
-                            break;
-                        }
-                        
-                        menu_algoritmo_1.main_algoritmo_1(celectOptions, this); //this = eu mesmo; passa a propria classe como parametro
-                    }while(true);
+                    algoritmo.op_1(this); // this passa a propria classe como parametro
                     break;
-                
-                
-                case 0:
-                    System.out.println("Programa finalizado");
+                case 2:
+                    algoritmo.op_2(this);
                     break;
-                
+
+                case 3:
+                    algoritmo.op_3(this);
+                    break;
+                case 4:
+                    algoritmo.op_4(this);
+                    break;
+                case 5:
+                    algoritmo.op_5(this);
+                    break;
+                case 6:
+                    algoritmo.op_6(this);
+                    break;
+                case 7:
+                    algoritmo.op_7(this);
+                    break;
+
                 default:
-                System.out.println("Erro: informe uma das alternativas");
+                    System.out.println("Erro: informe uma das alternativas");
+                    break;
+            }
+
+            // Condição de saida
+            if (celectOptions == -1) {
+                System.out.println("\nPrograma finalizado\n");
                 break;
             }
-                
-            //condição de saida
-            if(numberCelect == 0){
-                break;
-            }   
-        }while(true);
+        } while (true);
     }
 }

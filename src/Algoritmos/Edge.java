@@ -32,19 +32,20 @@ public class Edge {
 
 	// Setters
 	/*
-	public void setU(String u) {
-		this.u = u;
-	}
-
-	public void setV(String v) {
-		this.v = v;
-	}
-
-	public void setT(int t) {
-		this.t = t;
-	}
-
-	public void setLambda(int lambda) {
-		this.lambda = lambda;
-	}*/
+	 * public void setU(String u) {
+	 * this.u = u;
+	 * }
+	 * 
+	 * public void setV(String v) {
+	 * this.v = v;
+	 * }
+	 * 
+	 * public void setT(int t) {
+	 * this.t = t;
+	 * }
+	 * 
+	 * public void setLambda(int lambda) {
+	 * this.lambda = lambda;
+	 * }
+	 */
 }
