@@ -31,6 +31,7 @@ public class Edge {
 	}
 
 	// Setters
+	/*
 	public void setU(String u) {
 		this.u = u;
 	}
@@ -45,5 +46,5 @@ public class Edge {
 
 	public void setLambda(int lambda) {
 		this.lambda = lambda;
-	}
+	}*/
 }

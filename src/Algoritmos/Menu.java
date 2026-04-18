@@ -2,23 +2,73 @@ package Algoritmos;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Collection;
+//import java.util.Collection;
 import java.util.Comparator;
 
 public class Menu {
     //fluxo do menu
-    public int numberCelect;
-    public int celectOptions;
-    public int opcao;
+    private int numberCelect;
+    private int celectOptions;
+    private int opcao;
     
     //Criação dos contrutores para o algoritmo 1
-    public List<String> nos = new ArrayList<>();
-    public String noOrigem;
-    public int t_alpha;
-    public int t_omega;
-    public List<Edge> edges = new ArrayList<>();
+    private List<String> nos = new ArrayList<>();
+    private List<Edge> edges = new ArrayList<>();
+    
+    private String noOrigem;
+    private int t_alpha;
+    private int t_omega;
+    
+    private Main_menu_algoritmo_1 menu_algoritmo_1 = new Main_menu_algoritmo_1();
     //objetos recorrentes
-    public Scanner leitor = new Scanner(System.in);
+    Scanner leitor = new Scanner(System.in);
+
+// ==========================================
+
+    // ==========================================
+    // GETTERS E SETTERS - ALGORITMO 1
+    // ==========================================
+
+    public List<String> getNos() {
+        return nos;
+    }
+
+    public void setNos(List<String> nos) {
+        this.nos = nos;
+    }
+
+    public List<Edge> getEdges() {
+        return edges;
+    }
+
+    public void setEdges(List<Edge> edges) {
+        this.edges = edges;
+    }
+
+    public String getNoOrigem() {
+        return noOrigem;
+    }
+
+    public void setNoOrigem(String noOrigem) {
+        this.noOrigem = noOrigem;
+    }
+
+    public int getT_alpha() {
+        return t_alpha;
+    }
+
+    public void setT_alpha(int t_alpha) {
+        this.t_alpha = t_alpha;
+    }
+
+    public int getT_omega() {
+        return t_omega;
+    }
+
+    public void setT_omega(int t_omega) {
+        this.t_omega = t_omega;
+    }
+    
 
     
     /*public Menu(){
@@ -28,10 +78,12 @@ public class Menu {
 
     public int menu_principal(){
         //Scanner opScanner = new Scanner(System.in);
+        System.out.println("\n==== Menu principal ====\n");
         System.out.println("[1] - Algoritmo 1");
         System.out.println("[2] - Algoritmo 2");
         System.out.println("[3] - Algoritmo 3");
         System.out.println("[0] - Finalizar Programa");
+        System.out.print("\nOpção: ");
         opcao = leitor.nextInt();
         leitor.nextLine(); // limpar sobra do enter
         return opcao;
@@ -39,6 +91,7 @@ public class Menu {
 
     public int menu_Algoritmo_1(){
         //Scanner opScanner = new Scanner(System.in);
+        System.out.println("\n==== Menu Algoritmo ====\n");
         System.out.println("[1] - adicionar nós");
         System.out.println("[2] - Informar vertece de origem");
         System.out.println("[3] - Infomar tempo inicial");
@@ -48,108 +101,11 @@ public class Menu {
         System.out.println("[7] - Executar algoritmo 1");
 
         System.out.println("[0] - Voltar ao menu principal");
+        System.out.print("\nOpção: ");
         opcao = leitor.nextInt();
         leitor.nextLine();
         return opcao;
     }
- 
-    public void main_algoritmo_1(int celectOptions){
-        
-        switch (celectOptions) {
-            case 0: // Retornar ao menu principal
-                break;
-
-            case 1: // Adicionar nos
-                System.out.println("==== Adicionando nós ====");
-                System.out.println("[0] - Sair de adicionar nós");
-                
-                do{
-                    System.out.println("Informe o nó e precione enter: ");
-                    String no = leitor.nextLine();
-
-                    if (no.equalsIgnoreCase("0")){
-                        break;
-                    }
-            
-                    nos.add(no); // adicionar a lista
-                    nos.sort(null); // ordenar lista 
-
-                }while(true);
-                    break;
-            
-            case 2: //Informar nó de origem
-                System.out.println("Informe o nó origem: ");
-                noOrigem = leitor.nextLine();
-                break;
-
-            case 3:  // Informar tempo inicial
-                System.out.println("Informe o tempo inicial: ");
-                t_alpha = leitor.nextInt();
-                leitor.nextLine();
-                break;
-
-            case 4: // Informar tempo final
-                System.out.println("Informe o tempo final");
-                t_omega = leitor.nextInt();
-                leitor.nextLine();
-                break;
-            
-            case 5: // Definindo edges
-                
-                System.out.println("==== Definindo Arestas ====");
-                System.out.println("[0] - Voltar");
-
-                do{
-                    System.out.println("=== + Novo nó + ===");
-                    System.out.println("Nó partida: ");
-                    String u = leitor.nextLine();
-
-                    if(u.equals("0")){
-                        break;
-                    }
-
-                    System.out.println("Nó chegada: ");
-                    String v = leitor.nextLine();
-
-                    System.out.println("Tempo de inicio: ");
-                    int t_iniciao = leitor.nextInt();
-                    leitor.nextLine();
-
-                    System.out.println("Tempo de duração: ");
-                    int t_duracao = leitor.nextInt();
-                    leitor.nextLine();
-
-                    Edge newEdge = new Edge(u, v, t_iniciao, t_duracao);
-
-                    edges.add(newEdge);
-                    edges.sort(Comparator.comparingInt(Edge::getT)); // orndena pelo tempo inicial
-
-                }while(true);
-
-                break;
-
-            case 6: // Inprimir detalhes
-                System.out.println("Nos: " + nos);
-                System.err.println("Nó origem: " + noOrigem);
-                System.out.println("Tempo inicial: " + t_alpha);
-                System.out.println("Tempo final: " + t_omega);
-                System.out.println("Edges: " + edges);
-                break;
-
-            case 7: 
-                
-                Algoritmo1 algoritmo = new Algoritmo1();
-                algoritmo.executar(nos, noOrigem, t_alpha, t_omega, edges);
-                break;
-
-            default:
-                System.out.println("Erro: informe uma das alternativas");
-                break;
-        }
-        
-        //System.out.println("Nos: " + nos);
-    }
-
 
 //MENU GLOBAL ===================================================================================================================
     public void MenuGlobal(){
@@ -164,8 +120,8 @@ public class Menu {
                         if(celectOptions == 0){
                             break;
                         }
-                        main_algoritmo_1(celectOptions);
-
+                        
+                        menu_algoritmo_1.main_algoritmo_1(celectOptions, this); //this = eu mesmo; passa a propria classe como parametro
                     }while(true);
                     break;
                 

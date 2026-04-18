@@ -12,8 +12,9 @@
 
 <Futuras alterações> 
  
-    - Pedir para o usuário informar os verteces e os tempos
-    - Solicitar o veretece de partida/destino ao usuário
+    
+    - Criação do menu
+    - Salvar grafos no banco de dados
     - Criar um metodo para que ao alcançar o vertece destino, com o caminho mais rapido, finalize a execução do algoritimo e imprima o todo o caminho, seu percurso, o tempo gasto entre cada vertece e tempo total do percurso.
     
 <end>
