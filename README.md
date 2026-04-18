@@ -12,6 +12,7 @@
 - **`Algoritmo1`**: Responsável por encapsular e executar a lógica central do algoritmo de busca no grafo temporal.
 - **`Main`**: Classe principal, responsável por instanciar e iniciar a execução do código.
 - **`Menu`**: Gerencia o fluxo do programa e a interface com o usuário.
+- **`Options`**: Guarda os metodos de execução do fluxo gerenciado pelo menu
 
 ### Tarefas Pendentes (To-Do)
 
