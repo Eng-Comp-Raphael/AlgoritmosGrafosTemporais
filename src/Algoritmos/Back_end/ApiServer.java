@@ -144,7 +144,7 @@ public class ApiServer {
 
             server.setExecutor(null);
             server.start();
-            System.out.println("[API] Servidor FULL STACK rodando na porta 8080!");
+            System.out.println("\n[API] Servidor FULL STACK rodando na porta 8080!\n");
 
         } catch (IOException e) {
             System.out.println("Erro ao iniciar o servidor: " + e.getMessage());
