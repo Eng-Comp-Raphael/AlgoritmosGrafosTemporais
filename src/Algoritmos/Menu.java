@@ -14,6 +14,7 @@ public class Menu {
     private List<Edge> edges = new ArrayList<>();
 
     private String noOrigem;
+    private String noDestino;
     private int t_alpha;
     private int t_omega;
 
@@ -49,8 +50,16 @@ public class Menu {
         this.noOrigem = noOrigem;
     }
 
+    public String getNoDestino() {
+    return noDestino;
+    }
+
     public int getT_alpha() {
         return t_alpha;
+    }
+
+    public void setNoDestino(String noDestino) {
+    this.noDestino = noDestino;
     }
 
     public void setT_alpha(int t_alpha) {
@@ -73,12 +82,13 @@ public class Menu {
         // Scanner opScanner = new Scanner(System.in);
         System.out.println("\n==== Menu Algoritmo ====\n");
         System.out.println("[1] - adicionar nós");
-        System.out.println("[2] - Informar vertece de origem");
-        System.out.println("[3] - Infomar tempo inicial");
-        System.out.println("[4] - Informar tempo final");
-        System.out.println("[5] - Definir edges");
-        System.out.println("[6] - Imprimir detalhes ");
-        System.out.println("[7] - Executar algoritmo 1");
+        System.out.println("[2] - Informar nó de origem e destino");
+        System.out.println("[3] - Infomar tempo inicial e final");
+        System.out.println("[4] - Definir edges");
+        System.out.println("[5] - Imprimir detalhes ");
+        System.out.println("[6] - Deletar nos ");
+        System.out.println("[7] - Deletar arestas ");
+        System.out.println("[8] - Executar algoritmo 1");
 
         System.out.println("[-1] - Finalizar programa");
         System.out.print("\nOpção: ");
@@ -88,6 +98,17 @@ public class Menu {
     }
 
     public void MenuGlobal() {
+
+       
+        SQLite db = new SQLite();
+        
+        //Puxar listas
+        this.nos = db.carregarNos();
+        this.edges = db.carregarEdges();
+
+        // Puxa as configurações (nó origem e tempos)
+        db.carregarConfiguracao(this);
+        System.out.println("\n[Banco de Dados] Dados carregados com sucesso!");
 
         do {
             celectOptions = menu_app();
@@ -115,7 +136,9 @@ public class Menu {
                 case 7:
                     algoritmo.op_7(this);
                     break;
-
+                case 8:
+                    algoritmo.op_8(this);
+                    break;
                 default:
                     System.out.println("Erro: informe uma das alternativas");
                     break;

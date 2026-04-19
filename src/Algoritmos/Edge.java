@@ -30,22 +30,7 @@ public class Edge {
 		return lambda;
 	}
 
-	// Setters
-	/*
-	 * public void setU(String u) {
-	 * this.u = u;
-	 * }
-	 * 
-	 * public void setV(String v) {
-	 * this.v = v;
-	 * }
-	 * 
-	 * public void setT(int t) {
-	 * this.t = t;
-	 * }
-	 * 
-	 * public void setLambda(int lambda) {
-	 * this.lambda = lambda;
-	 * }
-	 */
+    public String toString() {
+        return "(" + u + ", " + v + ", " + t + ", " + lambda + ")";
+    }
 }
