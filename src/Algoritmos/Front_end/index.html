@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Grafos Temporais</title>
     <link rel="stylesheet" href="style.css">
+    
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -12,18 +14,21 @@
         <aside class="sidebar">
             <div class="brand">
                 <div class="logo"></div>
-                <h2>TempoGraph</h2>
+                <h2>Grafo Temporal</h2>
             </div>
             <nav class="menu">
                 <button class="menu-item active" onclick="mudarAba('aba-config')">⚙️ Configurações Iniciais</button>
                 <button class="menu-item" onclick="mudarAba('aba-nos')">⏺️ Gerenciar Nós</button>
                 <button class="menu-item" onclick="mudarAba('aba-arestas')">➡️ Gerenciar Arestas</button>
                 <button class="menu-item" onclick="mudarAba('aba-detalhes')">📊 Resumo do Banco</button>
+                
+                <button class="menu-item" onclick="mudarAba('aba-grafo')">🕸️ Visualizar Grafo</button>
+                
                 <button class="menu-item highlight" onclick="mudarAba('aba-executar')">▶️ Executar Algoritmo</button>
             </nav>
             
             <div class="sidebar-footer">
-                <button class="btn-sync" onclick="carregarDoBanco()">🔄 Puxar Dados do Banco</button>
+                <button class="btn-sync" onclick="carregarDoBanco(true)">🔄 Puxar Dados do Banco</button>
             </div>
         </aside>
 
@@ -32,16 +37,16 @@
             <section id="aba-config" class="tab-content active">
                 <div class="header-aba">
                     <h1>Configurações da Busca</h1>
-                    <p>Defina a janela de tempo e os vértices alvo (Salvo na tabela 'config').</p>
+                    <p>Defina a janela de tempo e os nós alvo.</p>
                 </div>
                 <div class="card">
                     <div class="input-grid">
                         <div class="input-group">
-                            <label>Nó de Origem</label>
+                            <label>Nó de Origem (Destacado em Azul)</label>
                             <input type="text" id="confOrigem" placeholder="Ex: A">
                         </div>
                         <div class="input-group">
-                            <label>Nó de Destino</label>
+                            <label>Nó de Destino (Destacado em Laranja)</label>
                             <input type="text" id="confDestino" placeholder="Ex: L">
                         </div>
                         <div class="input-group">
@@ -60,23 +65,19 @@
             <section id="aba-nos" class="tab-content">
                 <div class="header-aba">
                     <h1>Gerenciamento de Nós</h1>
-                    <p>Adicione, visualize ou delete os vértices do banco de dados.</p>
                 </div>
                 <div class="card split-card">
                     <div class="form-area">
                         <h3>Adicionar Novo Nó</h3>
                         <div class="input-group">
                             <label>Identificador do Nó</label>
-                            <input type="text" id="novoNo" placeholder="Digite o nome (Ex: A)">
+                            <input type="text" id="novoNo" placeholder="Digite o nome do nó (Ex: A)">
                         </div>
                         <button class="btn-primary" onclick="adicionarNo()">+ Adicionar Nó</button>
                     </div>
-                    
                     <div class="list-area">
-                        <h3>Nós Salvos no Banco de Dados</h3>
-                        <ul id="listaNos" class="dynamic-list">
-                            <li class="empty-msg">Nenhum nó cadastrado.</li>
-                        </ul>
+                        <h3>Nós no Banco</h3>
+                        <ul id="listaNos" class="dynamic-list"></ul>
                     </div>
                 </div>
             </section>
@@ -84,75 +85,67 @@
             <section id="aba-arestas" class="tab-content">
                 <div class="header-aba">
                     <h1>Gerenciamento de Arestas</h1>
-                    <p>Adicione, visualize ou delete as conexões temporais.</p>
                 </div>
                 <div class="card split-card">
                     <div class="form-area">
                         <h3>Nova Aresta (Edge)</h3>
                         <div class="input-grid half">
                             <div class="input-group">
-                                <label>Nó Origem (u)</label>
-                                <input type="text" id="arestaU" placeholder="Ex: A">
+                                <label>Origem (u)</label>
+                                <input type="text" id="arestaU">
                             </div>
                             <div class="input-group">
-                                <label>Nó Destino (v)</label>
-                                <input type="text" id="arestaV" placeholder="Ex: B">
+                                <label>Destino (v)</label>
+                                <input type="text" id="arestaV">
                             </div>
                             <div class="input-group">
-                                <label>Tempo de Início (t)</label>
-                                <input type="number" id="arestaT" placeholder="0">
+                                <label>Início (t)</label>
+                                <input type="number" id="arestaT">
                             </div>
                             <div class="input-group">
-                                <label>Duração (lambda)</label>
-                                <input type="number" id="arestaLambda" placeholder="1">
+                                <label>Duração (λ)</label>
+                                <input type="number" id="arestaLambda">
                             </div>
                         </div>
                         <button class="btn-primary" onclick="adicionarAresta()">+ Adicionar Aresta</button>
                     </div>
-
                     <div class="list-area">
-                        <h3>Arestas Salvas no Banco de Dados</h3>
-                        <ul id="listaArestas" class="dynamic-list">
-                            <li class="empty-msg">Nenhuma aresta cadastrada.</li>
-                        </ul>
+                        <h3>Arestas no Banco</h3>
+                        <ul id="listaArestas" class="dynamic-list"></ul>
                     </div>
                 </div>
             </section>
 
             <section id="aba-detalhes" class="tab-content">
                 <div class="header-aba">
-                    <h1>Visão Geral do Grafo</h1>
-                    <p>Resumo de todas as informações mapeadas.</p>
+                    <h1>Visão Geral</h1>
                 </div>
                 <div class="card bg-purple">
                     <div class="stats-grid">
-                        <div class="stat-box">
-                            <span>Origem ➡️ Destino</span>
-                            <h3 id="detalheRota">- ➡️ -</h3>
-                        </div>
-                        <div class="stat-box">
-                            <span>Janela de Tempo</span>
-                            <h3 id="detalheTempo">- até -</h3>
-                        </div>
-                        <div class="stat-box">
-                            <span>Total de Nós</span>
-                            <h3 id="detalheQtdNos">0</h3>
-                        </div>
-                        <div class="stat-box">
-                            <span>Total de Arestas</span>
-                            <h3 id="detalheQtdArestas">0</h3>
-                        </div>
+                        <div class="stat-box"><span>Rota</span><h3 id="detalheRota">- ➡️ -</h3></div>
+                        <div class="stat-box"><span>Tempo</span><h3 id="detalheTempo">- até -</h3></div>
+                        <div class="stat-box"><span>Nós</span><h3 id="detalheQtdNos">0</h3></div>
+                        <div class="stat-box"><span>Arestas</span><h3 id="detalheQtdArestas">0</h3></div>
                     </div>
+                </div>
+            </section>
+
+            <section id="aba-grafo" class="tab-content">
+                <div class="header-aba">
+                    <h1>Grafo Temporal Mapeado</h1>
+                    <p>Azul = Origem | Laranja = Destino | Verde = Caminho Mínimo</p>
+                </div>
+                <div class="card">
+                    <div id="grafoContainer" style="width: 100%; height: 600px; border: 2px solid #e1e1e1; border-radius: 12px; background-color: #fcfcfc;"></div>
                 </div>
             </section>
 
             <section id="aba-executar" class="tab-content">
                 <div class="header-aba">
                     <h1>Análise de Caminho Mínimo</h1>
-                    <p>Execute o algoritmo 1 para encontrar a melhor rota no tempo.</p>
                 </div>
                 <div class="card text-center">
-                    <button class="btn-run" onclick="executarAlgoritmo()">Rodar Algoritmo 1</button>
+                    <button class="btn-run" onclick="executarAlgoritmo()" style="margin-bottom: 30px;">Rodar Algoritmo 1</button>
                     
                     <div id="boxResultado" class="resultado-box">
                         <h2>Resultado da Busca</h2>
