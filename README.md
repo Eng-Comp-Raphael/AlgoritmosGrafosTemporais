@@ -30,7 +30,7 @@
 - [x] Criar persistência de dados (Salvar informações em um banco de dados).
 - [ ] Otimizar o algoritmo: criar um método para que, ao alcançar o vértice de destino com o caminho mais rápido, a execução seja finalizada imediatamente.
 - [x] Melhorar o *output*: imprimir todo o caminho percorrido, o tempo gasto entre cada vértice e o tempo total do percurso.
-
+- [ ] Criar Front-end com HTML/CSS/JS
 ---
 
 ### Detalhamento: A Classe `Main`
