@@ -1,4 +1,4 @@
-package Algoritmos;
+package Algoritmos.Back_end;
 
 import java.util.Scanner;
 import java.util.Comparator;

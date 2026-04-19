@@ -1,4 +1,4 @@
-package Algoritmos;
+package Algoritmos.Back_end;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -81,10 +81,10 @@ public class Menu {
     public int menu_app() {
         // Scanner opScanner = new Scanner(System.in);
         System.out.println("\n==== Menu Algoritmo ====\n");
-        System.out.println("[1] - adicionar nós");
+        System.out.println("[1] - Adicionar nós");
         System.out.println("[2] - Informar nó de origem e destino");
         System.out.println("[3] - Infomar tempo inicial e final");
-        System.out.println("[4] - Definir edges");
+        System.out.println("[4] - Adicionar edges");
         System.out.println("[5] - Imprimir detalhes ");
         System.out.println("[6] - Deletar nos ");
         System.out.println("[7] - Deletar arestas ");
@@ -112,6 +112,12 @@ public class Menu {
 
         do {
             celectOptions = menu_app();
+
+             // Condição de saida
+            if (celectOptions == -1) {
+                System.out.println("\n==== Programa finalizado ====\n");
+                break;
+            }
 
             switch (celectOptions) {
                 case 1:
@@ -142,12 +148,6 @@ public class Menu {
                 default:
                     System.out.println("Erro: informe uma das alternativas");
                     break;
-            }
-
-            // Condição de saida
-            if (celectOptions == -1) {
-                System.out.println("\nPrograma finalizado\n");
-                break;
             }
         } while (true);
     }

@@ -1,4 +1,4 @@
-package Algoritmos;
+package Algoritmos.Back_end;
 
 public class Edge {
 	private String u; // Origem
