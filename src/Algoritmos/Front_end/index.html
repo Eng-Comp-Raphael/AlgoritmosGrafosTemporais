@@ -18,9 +18,13 @@
                 <button class="menu-item active" onclick="mudarAba('aba-config')">⚙️ Configurações Iniciais</button>
                 <button class="menu-item" onclick="mudarAba('aba-nos')">⏺️ Gerenciar Nós</button>
                 <button class="menu-item" onclick="mudarAba('aba-arestas')">➡️ Gerenciar Arestas</button>
-                <button class="menu-item" onclick="mudarAba('aba-detalhes')">📊 Resumo e Detalhes</button>
+                <button class="menu-item" onclick="mudarAba('aba-detalhes')">📊 Resumo do Banco</button>
                 <button class="menu-item highlight" onclick="mudarAba('aba-executar')">▶️ Executar Algoritmo</button>
             </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-sync" onclick="carregarDoBanco()">🔄 Puxar Dados do Banco</button>
+            </div>
         </aside>
 
         <main class="content">
@@ -28,7 +32,7 @@
             <section id="aba-config" class="tab-content active">
                 <div class="header-aba">
                     <h1>Configurações da Busca</h1>
-                    <p>Defina a janela de tempo e os vértices alvo.</p>
+                    <p>Defina a janela de tempo e os vértices alvo (Salvo na tabela 'config').</p>
                 </div>
                 <div class="card">
                     <div class="input-grid">
@@ -56,7 +60,7 @@
             <section id="aba-nos" class="tab-content">
                 <div class="header-aba">
                     <h1>Gerenciamento de Nós</h1>
-                    <p>Adicione ou remova os vértices do seu grafo.</p>
+                    <p>Adicione, visualize ou delete os vértices do banco de dados.</p>
                 </div>
                 <div class="card split-card">
                     <div class="form-area">
@@ -67,8 +71,9 @@
                         </div>
                         <button class="btn-primary" onclick="adicionarNo()">+ Adicionar Nó</button>
                     </div>
+                    
                     <div class="list-area">
-                        <h3>Nós Cadastrados</h3>
+                        <h3>Nós Salvos no Banco de Dados</h3>
                         <ul id="listaNos" class="dynamic-list">
                             <li class="empty-msg">Nenhum nó cadastrado.</li>
                         </ul>
@@ -79,7 +84,7 @@
             <section id="aba-arestas" class="tab-content">
                 <div class="header-aba">
                     <h1>Gerenciamento de Arestas</h1>
-                    <p>Crie as conexões temporais entre os nós.</p>
+                    <p>Adicione, visualize ou delete as conexões temporais.</p>
                 </div>
                 <div class="card split-card">
                     <div class="form-area">
@@ -104,8 +109,9 @@
                         </div>
                         <button class="btn-primary" onclick="adicionarAresta()">+ Adicionar Aresta</button>
                     </div>
+
                     <div class="list-area">
-                        <h3>Arestas Cadastradas</h3>
+                        <h3>Arestas Salvas no Banco de Dados</h3>
                         <ul id="listaArestas" class="dynamic-list">
                             <li class="empty-msg">Nenhuma aresta cadastrada.</li>
                         </ul>
@@ -143,7 +149,7 @@
             <section id="aba-executar" class="tab-content">
                 <div class="header-aba">
                     <h1>Análise de Caminho Mínimo</h1>
-                    <p>Execute o algoritmo para encontrar a melhor rota baseada no tempo de chegada mais cedo.</p>
+                    <p>Execute o algoritmo 1 para encontrar a melhor rota no tempo.</p>
                 </div>
                 <div class="card text-center">
                     <button class="btn-run" onclick="executarAlgoritmo()">Rodar Algoritmo 1</button>
